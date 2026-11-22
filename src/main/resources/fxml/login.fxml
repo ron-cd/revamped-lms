@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.librarymanagement.controllers.LoginController"
+           styleClass="root-dark">
+    <VBox styleClass="card" maxWidth="420" maxHeight="-Infinity" spacing="14" alignment="TOP_LEFT">
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <StackPane fx:id="logoWrap" styleClass="brand-logo"/>
+            <VBox spacing="1">
+                <Label text="Library Management System" styleClass="brand-name"/>
+                <Label text="Sign in to continue" styleClass="brand-sub"/>
+            </VBox>
+        </HBox>
+        <Label fx:id="noticeLabel" styleClass="muted" wrapText="true"/>
+        <Label text="Username" styleClass="field-label"/>
+        <TextField fx:id="usernameField"/>
+        <Label text="Password" styleClass="field-label"/>
+        <StackPane alignment="CENTER_RIGHT">
+            <PasswordField fx:id="passwordField" styleClass="trailing-icon"/>
+            <TextField fx:id="visiblePasswordField" styleClass="trailing-icon"/>
+            <Button fx:id="toggleButton" styleClass="icon-button" onAction="#onTogglePassword" focusTraversable="false"
+                    StackPane.alignment="CENTER_RIGHT"/>
+        </StackPane>
+        <Label fx:id="errorLabel" styleClass="error" wrapText="true"/>
+        <Button fx:id="loginButton" text="Sign in" styleClass="primary" onAction="#onLogin"
+                maxWidth="Infinity" defaultButton="true"/>
+    </VBox>
+</StackPane>

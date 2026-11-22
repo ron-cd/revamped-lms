@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.librarymanagement.controllers.MessageController"
+           styleClass="root-dark">
+    <VBox styleClass="card" maxWidth="460" spacing="12">
+        <Label fx:id="titleLabel" styleClass="title"/>
+        <Label fx:id="bodyLabel" wrapText="true" styleClass="muted"/>
+    </VBox>
+</StackPane>
