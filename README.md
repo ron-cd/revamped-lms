@@ -1,7 +1,7 @@
 # Library Management System
 
 Offline desktop app (Java 21, JavaFX, SQLite) for a student library. Windows target.
-**Current phase: 4 (core modules), steps done: authentication, user management.** See `docs/`.
+**Current phase: 4 (core modules), steps done: authentication, user management, student management.** See `docs/`.
 
 ## Requirements to build
 - JDK 21

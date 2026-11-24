@@ -41,6 +41,12 @@ public final class AppDialog {
      */
     public static boolean form(Window owner, String title, String subtitle, Node content, String confirmText,
                                BooleanSupplier preValidate, FormAction action) {
+        return form(owner, title, subtitle, content, confirmText, preValidate, action, 460);
+    }
+
+    /** Same as above with a custom dialog width (for larger forms). */
+    public static boolean form(Window owner, String title, String subtitle, Node content, String confirmText,
+                               BooleanSupplier preValidate, FormAction action, double width) {
         ButtonType cancelType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         ButtonType confirmType = new ButtonType(confirmText, ButtonBar.ButtonData.OK_DONE);
 
@@ -69,7 +75,7 @@ public final class AppDialog {
         pane.setHeaderText(null);
         pane.setGraphic(null);
         pane.setContent(box);
-        pane.setPrefWidth(460);
+        pane.setPrefWidth(width);
         pane.getButtonTypes().addAll(cancelType, confirmType);
 
         Button confirm = (Button) pane.lookupButton(confirmType);
@@ -136,6 +142,22 @@ public final class AppDialog {
         cancelButton.setDefaultButton(destructive);
 
         return dialog.showAndWait().filter(b -> b == confirmType).isPresent();
+    }
+
+    /** Read-only content in a dialog with a single Close button (for profiles and details). */
+    public static void view(Window owner, String title, Node content, double width) {
+        ButtonType close = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Dialog<ButtonType> dialog = new Dialog<>();
+        if (owner != null) dialog.initOwner(owner);
+        dialog.setTitle(title);
+        DialogPane pane = dialog.getDialogPane();
+        pane.getStylesheets().add(Theme.stylesheet());
+        pane.setHeaderText(null);
+        pane.setGraphic(null);
+        pane.setContent(content);
+        pane.setPrefWidth(width);
+        pane.getButtonTypes().add(close);
+        dialog.showAndWait();
     }
 
     /** A message with a single OK button (for errors the user must acknowledge). */

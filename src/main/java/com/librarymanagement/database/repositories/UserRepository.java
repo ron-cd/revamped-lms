@@ -1,5 +1,6 @@
 package com.librarymanagement.database.repositories;
 
+import com.librarymanagement.database.SqlText;
 import com.librarymanagement.security.Permission;
 
 import java.sql.Connection;
@@ -93,10 +94,8 @@ public class UserRepository {
 
     // ------------------------------------------------------------------ listing
 
-    /** Escapes LIKE wildcards so a search for "%" or "_" matches those characters literally. */
     static String likePattern(String search) {
-        String s = search == null ? "" : search.trim();
-        return "%" + s.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%";
+        return SqlText.likeContains(search);
     }
 
     public List<UserRow> list(Connection c, String search, int offset, int limit) throws SQLException {
