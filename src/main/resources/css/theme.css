@@ -284,3 +284,8 @@
 
 /* ---------- Inputs with an icon button inside (password visibility toggle) ---------- */
 .text-field.trailing-icon, .password-field.trailing-icon { -fx-padding: 8 40 8 10; }
+
+/* ---------- Editable combo boxes (text typed into the box itself) ---------- */
+.combo-box-base .text-field { -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 8 10; }
+.info-label  { -fx-text-fill: -text-faint; -fx-font-size: 11px; -fx-font-weight: bold; }
+.info-value  { -fx-text-fill: -text; -fx-font-size: 13px; }
