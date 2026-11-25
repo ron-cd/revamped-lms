@@ -1,6 +1,7 @@
 package com.librarymanagement;
 
 import com.librarymanagement.config.AppPaths;
+import com.librarymanagement.controllers.BooksPage;
 import com.librarymanagement.controllers.LoginController;
 import com.librarymanagement.controllers.PasswordChangeScreen;
 import com.librarymanagement.controllers.SetupController;
@@ -9,6 +10,7 @@ import com.librarymanagement.controllers.UsersPage;
 import com.librarymanagement.database.DatabaseManager;
 import com.librarymanagement.database.MigrationRunner;
 import com.librarymanagement.database.repositories.AuditRepository;
+import com.librarymanagement.database.repositories.BookRepository;
 import com.librarymanagement.database.repositories.SettingsRepository;
 import com.librarymanagement.database.repositories.StudentRepository;
 import com.librarymanagement.database.repositories.UserRepository;
@@ -19,6 +21,7 @@ import com.librarymanagement.navigation.SessionWatcher;
 import com.librarymanagement.security.PasswordHasher;
 import com.librarymanagement.security.Session;
 import com.librarymanagement.services.AuthService;
+import com.librarymanagement.services.BookService;
 import com.librarymanagement.services.SetupService;
 import com.librarymanagement.services.StudentService;
 import com.librarymanagement.services.UserService;
@@ -45,6 +48,7 @@ public class Main extends Application {
     private AuthService auth;
     private UserService userService;
     private StudentService studentService;
+    private BookService bookService;
     private SessionWatcher watcher;
 
     @Override
@@ -67,6 +71,7 @@ public class Main extends Application {
         this.auth = new AuthService(db, users, new SettingsRepository(), audit, hasher, clock);
         this.userService = new UserService(db, users, audit, hasher, clock);
         this.studentService = new StudentService(db, new StudentRepository(), new SettingsRepository(), audit, clock);
+        this.bookService = new BookService(db, new BookRepository(), audit, clock);
 
         this.stage = stage;
         stage.setTitle("Library Management System");
@@ -102,6 +107,7 @@ public class Main extends Application {
 
     private void showShell(Session session) {
         AppShell shell = new AppShell();
+        shell.register(Page.BOOKS, () -> BooksPage.build(shell, session, bookService));
         shell.register(Page.STUDENTS, () -> StudentsPage.build(shell, session, studentService));
         shell.register(Page.USERS, () -> UsersPage.build(shell, session, userService));
         shell.register(Page.GALLERY, () -> GalleryPage.build(shell));

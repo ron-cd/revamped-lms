@@ -150,7 +150,7 @@ public class AppShell extends StackPane {
         navScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         VBox.setVgrow(navScroll, Priority.ALWAYS);
 
-        Label footer = new Label("Version 0.4.3");
+        Label footer = new Label("Version 0.4.4");
         footer.getStyleClass().add("sidebar-footer");
 
         VBox sidebar = new VBox(brand, navScroll, footer);
